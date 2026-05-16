@@ -100,7 +100,7 @@ export function PortfolioGallery({
               href={archiveButton.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors group mb-20"
+              className="inline-flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors group"
             >
               <span>{archiveButton.text}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -108,12 +108,18 @@ export function PortfolioGallery({
           ) : (
             <Link
               href={archiveButton.href}
-              className="inline-flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors group mb-20"
+              className="inline-flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors group"
             >
               <span>{archiveButton.text}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           )}
+
+          {/* Interaction hint */}
+          <p className="mt-5 mb-16 text-sm text-muted-foreground/60 tracking-wide">
+            <span className="hidden md:inline">↗ pick a card to visit the project</span>
+            <span className="inline md:hidden">swipe &amp; tap a card to visit the project</span>
+          </p>
         </div>
 
         {/* Desktop 3D overlapping layout */}
