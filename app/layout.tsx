@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Sora, JetBrains_Mono } from "next/font/google";
+import { PageLoader } from "@/components/layout/PageLoader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       className={`${geistSans.variable} ${sora.variable} ${jetbrainsMono.variable} dark`}
     >
       <body className="min-h-screen flex flex-col bg-background text-on-surface antialiased overflow-x-hidden">
-        {children}
+        <PageLoader>{children}</PageLoader>
       </body>
     </html>
   );

@@ -143,7 +143,8 @@ export default function Hero() {
         {/* ── Right column: Photo ── */}
         <div className="md:col-span-5 relative mt-10 md:mt-0">
           <motion.div
-            className="hero-photo relative w-full aspect-square rounded-xl overflow-hidden border border-white/10 shadow-2xl"
+            className="hero-photo relative w-full aspect-[3/4] rounded-xl overflow-hidden border border-white/10 shadow-2xl"
+            style={{ backgroundColor: "#0b1326" }}
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 22 }}
           >
@@ -152,11 +153,10 @@ export default function Hero() {
               alt="Zakaria Bhaibi"
               fill
               priority
-              className="object-cover hover:scale-105 transition-transform duration-500"
-              style={{ objectPosition: "50% 15%" }}
+              className="object-contain hover:scale-105 transition-transform duration-500"
             />
             <div
-              className="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
+              className="absolute inset-x-0 bottom-0 h-1/4 pointer-events-none"
               style={{ background: "linear-gradient(to top, #0b1326 0%, transparent 100%)" }}
             />
           </motion.div>
