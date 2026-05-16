@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { cn } from "@/lib/utils"
 
 interface PortfolioGalleryProps {
   title?: string;
@@ -203,69 +202,59 @@ export function PortfolioGallery({
           </div>
         </div>
 
-        {/* Mobile marquee layout */}
-        <div className="block md:hidden relative pb-8">
-          <div
-            className={cn(
-              "group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
-              "flex-row"
-            )}
-          >
-            {Array(marqueeRepeat)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    "flex shrink-0 justify-around [gap:var(--gap)]",
-                    "animate-marquee flex-row",
-                    { "group-hover:[animation-play-state:paused]": pauseOnHover }
-                  )}
+        {/* Mobile — horizontal swipe scroll */}
+        <div className="block md:hidden pb-8">
+          <div className="flex gap-4 overflow-x-auto px-4 pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {images.map((image, index) => (
+              <div key={index} className="flex-shrink-0 snap-start group">
+                <a
+                  href={image.href ?? undefined}
+                  target={image.href ? "_blank" : undefined}
+                  rel={image.href ? "noopener noreferrer" : undefined}
+                  className={image.href ? "cursor-pointer" : "cursor-default pointer-events-none"}
+                  onClick={() => onImageClick?.(index)}
+                  tabIndex={image.href ? 0 : -1}
                 >
-                  {images.map((image, index) => (
-                    <div
-                      key={`${i}-${index}`}
-                      className="group flex-shrink-0"
-                    >
-                      <a
-                        href={image.href ?? undefined}
-                        target={image.href ? "_blank" : undefined}
-                        rel={image.href ? "noopener noreferrer" : undefined}
-                        className={image.href ? "cursor-pointer" : "cursor-default pointer-events-none"}
-                        onClick={() => onImageClick?.(index)}
-                        tabIndex={image.href ? 0 : -1}
-                      >
-                        <div
-                          className="relative aspect-video w-64 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-105"
-                          style={{
-                            boxShadow: `
-                              rgba(0,0,0,0.01) 0.8px 0px 0.8px 0px,
-                              rgba(0,0,0,0.03) 2.4px 0px 2.4px 0px,
-                              rgba(0,0,0,0.08) 6.4px 0px 6.4px 0px,
-                              rgba(0,0,0,0.25) 20px 0px 20px 0px
-                            `,
-                          }}
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={image.src}
-                            alt={image.alt}
-                            className="w-full h-full object-cover"
-                            style={{ objectPosition: image.objectPosition ?? "left top" }}
-                            loading="lazy"
-                            decoding="async"
-                          />
-                          {image.title && (
-                            <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-black/70 to-transparent">
-                              <p className="text-white text-[10px] font-medium truncate">{image.title}</p>
-                            </div>
-                          )}
-                        </div>
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              ))}
+                  <div
+                    className="relative aspect-video w-72 rounded-lg overflow-hidden"
+                    style={{
+                      boxShadow: `
+                        rgba(0,0,0,0.01) 0.8px 0px 0.8px 0px,
+                        rgba(0,0,0,0.03) 2.4px 0px 2.4px 0px,
+                        rgba(0,0,0,0.08) 6.4px 0px 6.4px 0px,
+                        rgba(0,0,0,0.25) 20px 0px 20px 0px
+                      `,
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: image.objectPosition ?? "left top" }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {(image.title || image.href) && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-between gap-2">
+                        {image.title && (
+                          <p className="text-white text-xs font-medium truncate">{image.title}</p>
+                        )}
+                        {image.href && (
+                          <span className="flex-shrink-0">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                              <polyline points="15 3 21 3 21 9" />
+                              <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </div>
