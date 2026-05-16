@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useState } from "react"
+import { TextScramble } from "@/components/ui/text-scramble"
 
 interface PortfolioGalleryProps {
   title?: string;
@@ -44,6 +45,7 @@ export function PortfolioGallery({
   sectionId = "archives",
 }: PortfolioGalleryProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [hintTrigger, setHintTrigger] = useState(false)
 
   const defaultImages: Array<{ src: string; alt: string; title?: string }> = [
     {
@@ -116,9 +118,21 @@ export function PortfolioGallery({
           )}
 
           {/* Interaction hint */}
-          <p className="mt-5 mb-16 text-sm text-muted-foreground/60 tracking-wide">
-            <span className="hidden md:inline">↗ pick a card to visit the project</span>
-            <span className="inline md:hidden">swipe &amp; tap a card to visit the project</span>
+          <p className="mt-6 mb-16 text-base tracking-wide font-mono">
+            <TextScramble
+              as="span"
+              className="hidden md:inline text-muted-foreground/70 cursor-default"
+              speed={0.025}
+              duration={0.9}
+              trigger={hintTrigger}
+              onHoverStart={() => setHintTrigger(true)}
+              onScrambleComplete={() => setHintTrigger(false)}
+            >
+              pick a card to visit the project
+            </TextScramble>
+            <span className="inline md:hidden text-muted-foreground/70">
+              swipe &amp; tap a card to visit
+            </span>
           </p>
         </div>
 
