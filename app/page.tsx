@@ -16,9 +16,9 @@ export default function Home() {
         {/* All the same blue-navy hue — progressively lighter as you scroll deeper */}
         <SectionCard index={0} background="#060e20"><Hero /></SectionCard>
         <SectionCard index={1} background="#0b1326"><About /></SectionCard>
-        <SectionCard index={2} background="#111929"><Experience /></SectionCard>
-        <SectionCard index={3} background="#171f33"><Skills /></SectionCard>
-        <SectionCard index={4} background="#1e2740"><Projects /></SectionCard>
+        <SectionCard index={2} background="#111929"><Projects /></SectionCard>
+        <SectionCard index={3} background="#171f33"><Experience /></SectionCard>
+        <SectionCard index={4} background="#1e2740"><Skills /></SectionCard>
         <SectionCard index={5} background="#222a3d"><Contact /></SectionCard>
       </main>
       <Footer />
