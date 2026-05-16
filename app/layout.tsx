@@ -25,11 +25,6 @@ export const metadata: Metadata = {
     "Full stack web developer based in Morocco. Building bold, fast, and accessible digital experiences with React, Next.js, Python, and more.",
   keywords: ["Zakaria Bhaibi", "Full Stack Developer", "Web Developer", "React", "Next.js", "Morocco"],
   authors: [{ name: "Zakaria Bhaibi" }],
-  icons: {
-    icon: "/logo.svg",
-    shortcut: "/logo.svg",
-    apple: "/logo.svg",
-  },
   openGraph: {
     title: "Zakaria Bhaibi — Full Stack Developer",
     description: "Building bold digital experiences from Morocco to the world.",

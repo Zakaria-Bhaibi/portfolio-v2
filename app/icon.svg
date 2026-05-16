@@ -1,28 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <defs>
-    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
-      <feGaussianBlur stdDeviation="2.8" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-
-  <!-- Deep navy background -->
   <rect width="100" height="100" rx="20" fill="#0b1326"/>
-
-  <!-- Subtle inner border -->
-  <rect x="1.5" y="1.5" width="97" height="97" rx="19" fill="none" stroke="rgba(192,193,255,0.14)" stroke-width="1.5"/>
-
-  <!-- ZB lettermark -->
-  <g filter="url(#glow)" stroke="#c0c1ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5">
-    <!-- Z: top bar / diagonal / bottom bar -->
+  <g stroke="#c0c1ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5">
     <line x1="13" y1="26" x2="43" y2="26"/>
     <line x1="43" y1="26" x2="13" y2="74"/>
     <line x1="13" y1="74" x2="43" y2="74"/>
-
-    <!-- B: vertical stem + upper bump + lower bump -->
     <line x1="55" y1="26" x2="55" y2="74"/>
     <path d="M55 26 Q74 26 74 38 Q74 50 55 50"/>
     <path d="M55 50 Q78 50 78 62 Q78 74 55 74"/>
