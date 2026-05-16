@@ -20,20 +20,12 @@ export default function Hero() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // Only animate plain HTML elements — motion.* elements are owned by Framer Motion
         const tl = gsap.timeline({ delay: 0.1 });
         tl.from(".hero-badge",   { opacity: 0, y: -14, duration: 0.45, ease: "power2.out" })
           .from(".hero-heading", { opacity: 0, y: 48,  duration: 0.8,  ease: "power3.out" }, "-=0.15")
           .from(".hero-sub",     { opacity: 0, y: 20,  duration: 0.55, ease: "power2.out" }, "-=0.35")
-          .from(".hero-cta",     { opacity: 0, y: 16,  duration: 0.45, ease: "power2.out", stagger: 0.1 }, "-=0.3")
-          .from(".hero-stats",   { opacity: 0, y: 16,  duration: 0.45, ease: "power2.out" }, "-=0.2")
-          .from(".hero-photo",   { opacity: 0, scale: 0.88, duration: 1, ease: "power3.out" }, 0.15)
-          .from(".hero-tag",     {
-            opacity: 0,
-            x: (_i: number, el: Element) => el.classList.contains("tag-left") ? -20 : 20,
-            duration: 0.45,
-            ease: "power2.out",
-            stagger: 0.12,
-          }, "-=0.4");
+          .from(".hero-stats",   { opacity: 0, y: 16,  duration: 0.45, ease: "power2.out" }, "-=0.05");
       });
     },
     { scope: container }
@@ -97,11 +89,14 @@ export default function Hero() {
             {personalInfo.bio}
           </p>
 
-          {/* CTAs */}
+          {/* CTAs — Framer Motion owns entrance + interaction; GSAP stays off these */}
           <div className="flex flex-wrap items-center gap-4">
             <motion.a
               href="#projects"
-              className="hero-cta inline-flex items-center gap-2 bg-primary text-on-primary px-7 py-3.5 rounded text-code font-bold hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 bg-primary text-on-primary px-7 py-3.5 rounded text-code font-bold hover:opacity-90 transition-opacity"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: "easeOut", delay: 0.85 }}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -113,7 +108,10 @@ export default function Hero() {
             <motion.a
               href={personalInfo.cv}
               download
-              className="hero-cta inline-flex items-center gap-2 border border-primary text-primary px-7 py-3.5 rounded text-code font-bold hover:bg-primary/10 transition-colors"
+              className="inline-flex items-center gap-2 border border-primary text-primary px-7 py-3.5 rounded text-code font-bold hover:bg-primary/10 transition-colors"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: "easeOut", delay: 0.95 }}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -143,10 +141,12 @@ export default function Hero() {
         {/* ── Right column: Photo ── */}
         <div className="md:col-span-5 relative mt-10 md:mt-0">
           <motion.div
-            className="hero-photo relative w-full aspect-[3/4] rounded-xl overflow-hidden border border-white/10 shadow-2xl"
+            className="relative w-full aspect-[3/4] rounded-xl overflow-hidden border border-white/10 shadow-2xl"
             style={{ backgroundColor: "#0b1326" }}
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200, damping: 22 }}
           >
             <Image
               src="/profile.png"
