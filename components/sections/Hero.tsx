@@ -73,14 +73,13 @@ export default function Hero() {
             <div>
               <span className="text-on-surface font-light">deserves</span>
             </div>
-            {/* Line 3: [object]. — own full line, never fights the photo */}
-            <div className="flex items-baseline gap-[0.12em]">
+            {/* Line 3: [object] — own full line, never fights the photo */}
+            <div className="flex items-baseline">
               <AnimatedTextCycle
                 words={OBJECTS}
                 interval={CYCLE_MS}
-                className="gradient-text-teal italic"
+                className="gradient-text-teal italic pr-[0.18em]"
               />
-              <span className="text-on-surface flex-shrink-0">.</span>
             </div>
           </h1>
 
@@ -146,14 +145,13 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
-            whileHover={{ scale: 1.02 }}
           >
             <Image
               src="/profile.png"
               alt="Zakaria Bhaibi"
               fill
               priority
-              className="object-contain hover:scale-105 transition-transform duration-500"
+              className="object-cover"
             />
             <div
               className="absolute inset-x-0 bottom-0 h-1/4 pointer-events-none"

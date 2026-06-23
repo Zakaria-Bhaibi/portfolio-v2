@@ -14,18 +14,17 @@ export default function AnimatedTextCycle({
   className = "",
 }: AnimatedTextCycleProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // "auto" lets the container fit the first word naturally on initial paint.
   const [width, setWidth] = useState("auto");
   const measureRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (measureRef.current) {
-      const elements = measureRef.current.children;
-      if (elements.length > currentIndex) {
-        const newWidth = elements[currentIndex].getBoundingClientRect().width;
-        setWidth(`${newWidth}px`);
-      }
-    }
-  }, [currentIndex]);
+  // Lock the container to the *current* word's exact width.
+  const measure = () => {
+    const el = measureRef.current?.children[currentIndex] as
+      | HTMLElement
+      | undefined;
+    if (el) setWidth(`${el.getBoundingClientRect().width}px`);
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -62,15 +61,11 @@ export default function AnimatedTextCycle({
         ))}
       </div>
 
-      {/* overflow: visible so long words are never clipped during spring resize */}
-      <motion.span
-        className="relative inline-block"
-        animate={{
-          width,
-          transition: { type: "spring", stiffness: 150, damping: 15, mass: 1.2 },
-        }}
-      >
-        <AnimatePresence mode="wait" initial={false}>
+      {/* Width is snapped to the incoming word during the swap gap (onExitComplete),
+          while no word is visible — so the trailing dot never overlaps the text and
+          never jumps. */}
+      <span className="inline-block align-baseline" style={{ width }}>
+        <AnimatePresence mode="wait" initial={false} onExitComplete={measure}>
           <motion.span
             key={currentIndex}
             className={`inline-block font-bold ${className}`}
@@ -83,7 +78,7 @@ export default function AnimatedTextCycle({
             {words[currentIndex]}
           </motion.span>
         </AnimatePresence>
-      </motion.span>
+      </span>
     </>
   );
 }

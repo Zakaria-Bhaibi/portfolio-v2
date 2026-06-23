@@ -172,6 +172,20 @@ export const certifications = [
 
 export const projects = [
   {
+    src: "/images/shopwafra.png",
+    alt: "ShopWafra",
+    title: "ShopWafra — E-commerce Store",
+    objectPosition: "top",
+    href: "https://shopwafra.com",
+  },
+  {
+    src: "/images/grazenest.png",
+    alt: "GrazeNest",
+    title: "GrazeNest — E-commerce Store",
+    objectPosition: "top",
+    href: "https://grazenest.com",
+  },
+  {
     src: "/images/acesso digital.png",
     alt: "Acesso Digital",
     title: "Acesso Digital — Full Platform",
